@@ -1,0 +1,24 @@
+{
+  "name": "doppelgunner-stock",
+  "version": "1.0.0",
+  "description": "stock api for node",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test/test.js"
+  },
+  "keywords": [
+    "stock",
+    "node",
+    "nodejs",
+    "doppelgunner"
+  ],
+  "author": "doppelgunner",
+  "license": "ISC",
+  "dependencies": {
+    "dateformat": "^3.0.2",
+    "fast-csv": "^2.4.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.19.2"
+  }
+}
