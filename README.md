@@ -1,8 +1,6 @@
 # doppelgunner-stock api
 Api for getting historical-prices and analyzing its data.
 
--------------
-
 ## Samples
 
 ### Loading of historical prices from WSJ. 
@@ -22,8 +20,6 @@ function funcCallback(hpModel) {
     }).then(xurpas => HPCommons.getColumn(xurpas, 'date'))
       .then(dateColumn => console.log(dateColumn));
 ```
-
--------------
 
 ## Limitations
 * Downloads from WSJ as of now
