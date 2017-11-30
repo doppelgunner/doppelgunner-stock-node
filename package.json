@@ -1,6 +1,6 @@
 {
   "name": "doppelgunner-stock",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "stock api for node connects with WSJ as of now",
   "main": "index.js",
   "scripts": {
