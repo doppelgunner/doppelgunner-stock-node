@@ -20,8 +20,8 @@ function funcCallback(hpModel) {
         //Uncomment one of the samples to test
 
         //SAMPLE of getLowestPeaks, gets peaks within range of 30 days or 1 month in close column
-        // .then(x => HPCommons.getLowestPeaks(x, 30, 'close'))
-        // .then(peaks => console.log(peaks));
+        .then(x => HPCommons.getLowestPeaks(x, 30, 'close'))
+        .then(peaks => console.log(peaks));
 
         //SAMPLE of divided data by days, in the example group them per 5 days
         // .then(x => HPCommons.divideRows(x,5))
