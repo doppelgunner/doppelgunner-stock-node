@@ -17,7 +17,6 @@ module.exports = {
 }
 
 let now = dateFormat(new Date(), "mm/dd/yyyy");
-let csvStream = csv();
 
 function load(stream, funcCallback) {
     let histPricesArr = [];
@@ -41,6 +40,7 @@ function load(stream, funcCallback) {
  * @param {string} country 
  */
 function downloadWSJ(stockCode, isIndex, country) {
+    let csvStream = csv();
     if (country) {
         country = '/' + country;
     } else {
@@ -53,7 +53,7 @@ function downloadWSJ(stockCode, isIndex, country) {
 
     let sampleUrl = `http://quotes.wsj.com${country}/${stockCode}/historical-prices/download?MOD_VIEW=page&num_rows=50128&range_days=50128&startDate=08/25/1880&endDate=${now}`;
     //http.get(sampleUrl, (res) => res.pipe(csvStream));
-    let req = request.get(sampleUrl).withCredentials();
+    let req = request.get(sampleUrl);
     req.pipe(csvStream);
 
     console.log(logTitle, 'getting historical prices from ' + sampleUrl);

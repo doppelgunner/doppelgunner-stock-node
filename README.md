@@ -17,6 +17,12 @@ import { HP, HPCommons, HPModel } from 'doppelgunner-stock';
 HP.load(HP.downloadWSJ('X',false,'PH'), funcCallback);
 ```
 
+OR
+
+```javascript
+HP.load(HP.downloadWSJ('X',false,'PH'), () => {/*something to do here*/});
+```
+
 ### Function callback
 * Note: better to make promise for chaining
 * Note: This sample extracts and displays all dates
