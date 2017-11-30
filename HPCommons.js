@@ -23,6 +23,8 @@ module.exports = {
     divideRows: divideRows
 }
 
+function 
+
 /**
  * gets the lowest peaks of certain column given rows divided by days
  * @param {HPModel} hpModel 
