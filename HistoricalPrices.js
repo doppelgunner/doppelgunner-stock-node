@@ -2,6 +2,7 @@ const http = require('http');
 const csv = require('fast-csv');
 const dateFormat = require('dateformat');
 const _ = require('lodash');
+const request = require('superagent');
 
 const HPModel = require('./HPModel');
 const HPCommons = require('./HPCommons');
@@ -51,7 +52,9 @@ function downloadWSJ(stockCode, isIndex, country) {
     }
 
     let sampleUrl = `http://quotes.wsj.com${country}/${stockCode}/historical-prices/download?MOD_VIEW=page&num_rows=50128&range_days=50128&startDate=08/25/1880&endDate=${now}`;
-    http.get(sampleUrl, (res) => res.pipe(csvStream));
+    //http.get(sampleUrl, (res) => res.pipe(csvStream));
+    let req = request.get(sampleUrl).withCredentials();
+    req.pipe(csvStream);
 
     console.log(logTitle, 'getting historical prices from ' + sampleUrl);
     return csvStream;

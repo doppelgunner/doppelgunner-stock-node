@@ -1,12 +1,19 @@
 # doppelgunner-stock api
 Api for getting historical-prices and analyzing its data.
 
+## Installation
+```
+npm install --save doppelgunner-stock
+```
+
 ## Samples
 
 ### Loading of historical prices from WSJ. 
 * Note: internet is required
 * Note: important to pass function callback to execute when downloading finished
 ```javascript
+import { HP, HPCommons, HPModel } from 'doppelgunner-stock';
+
 HP.load(HP.downloadWSJ('X',false,'PH'), funcCallback);
 ```
 
@@ -19,6 +26,7 @@ function funcCallback(hpModel) {
         resolve(hpModel);
     }).then(xurpas => HPCommons.getColumn(xurpas, 'date'))
       .then(dateColumn => console.log(dateColumn));
+}
 ```
 
 ## Limitations

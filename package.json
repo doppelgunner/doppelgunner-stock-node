@@ -1,24 +1,26 @@
 {
   "name": "doppelgunner-stock",
   "version": "1.0.0",
-  "description": "stock api for node",
+  "description": "stock api for node connects with WSJ as of now",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
     "test": "node test/test.js"
   },
   "keywords": [
     "stock",
+    "stocks",
     "node",
     "nodejs",
-    "doppelgunner"
+    "doppelgunner",
+    "historical prices"
   ],
   "author": "doppelgunner",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "dateformat": "^3.0.2",
     "fast-csv": "^2.4.1",
     "lodash": "^4.17.4",
-    "moment": "^2.19.2"
+    "moment": "^2.19.2",
+    "superagent": "^3.8.1"
   }
 }
