@@ -26,7 +26,16 @@ function load(stream, funcCallback) {
     })
     .on('end', () => {
         let joinedArr = histPricesArr.join("\n").toLowerCase();
-        let result = d3dsv.csvParse(joinedArr);
+        let result = d3dsv.csvParse(joinedArr, function(d) {
+            return {
+                date: d.date,
+                open: +d.open,
+                high: +d.high,
+                low: +d.low,
+                close: +d.close,
+                volume: +d.volume
+            }
+        });
         _.forEach(result, row => {
             row.date = HPCommons.toMoment(row.date, SC.DATE_FORMAT_WSJ);
         });
