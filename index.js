@@ -4,7 +4,5 @@ module.exports = {
     HP: require('./HistoricalPrices'),
     
     StockConstants: require('./StockConstants'),
-
-    HPModel: require('./HPModel'),
     PeaksModel: require('./PeaksModel')
 }

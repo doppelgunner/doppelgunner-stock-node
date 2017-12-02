@@ -3,8 +3,8 @@ const csv = require('fast-csv');
 const dateFormat = require('dateformat');
 const _ = require('lodash');
 const request = require('superagent');
+const d3dsv = require('d3-dsv');
 
-const HPModel = require('./HPModel');
 const HPCommons = require('./HPCommons');
 const SC = require('./StockConstants');
 
@@ -24,12 +24,9 @@ function load(stream, funcCallback) {
         histPricesArr.push(data);
     })
     .on('end', () => {
-        let hpModel = new HPModel(histPricesArr.shift(),histPricesArr);
-        _.forEach(hpModel.data, row => {
-            row[0] = HPCommons
-                .toMoment(row[0], SC.DATE_FORMAT_WSJ);
-        });
-        funcCallback(hpModel);
+        let joinedArr = histPricesArr.join("\n").toLowerCase();
+        let result = d3dsv.csvParse(joinedArr);
+        funcCallback(result);
     });
 }
 

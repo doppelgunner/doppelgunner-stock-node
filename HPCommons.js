@@ -1,6 +1,5 @@
 const _ = require('lodash');
 const moment = require('moment');
-const HPModel = require('./HPModel');
 const SC = require('./StockConstants');
 const PeaksModel = require('./PeaksModel');
 
@@ -188,7 +187,7 @@ function getLatest(hpModel, columnName) {
 }
 
 /**
- * 
+ * @deprecated since version 2.0
  * @param {HPModel} hpModel 
  * @param {string} columnName 
  */
@@ -204,31 +203,28 @@ function getColumnIndex(hpModel, columnName) {
 
 /**
  * gets data given column header name
- * @param {HPModel} hpModel 
+ * @param {[]} d3Model 
  * @param {string} columnName 
  */
-function getColumn(hpModel, columnName) {
-    let columnIndex = getColumnIndex(hpModel, columnName);
-    if (columnIndex === -1) return undefined;
-
-    return _.map(hpModel.data, (row) => {
-        return row[columnIndex];
+function getColumn(d3Model, columnName) {
+    return _.map(d3Model, (row) => {
+        return row[columnName];
     });
 }
 
 /**
  * Gets the started date of the historical price
- * @param {HPModel} hpModel 
+ * @param {[]} d3Model 
  */
-function getStartedDate(hpModel) {
-    return _.last(hpModel.data)[0];
+function getStartedDate(d3Model) {
+    return _.last(d3Model).date;
 }
 
 /**
  * Gets the latest date of the historical price
- * @param {HPModel} hpModel 
+ * @param {[]} d3Model 
  */
-function getLatestDate(hpModel) {
-    return _.first(hpModel.data)[0];
+function getLatestDate(d3Model) {
+    return _.first(d3Model).date;
 }
 

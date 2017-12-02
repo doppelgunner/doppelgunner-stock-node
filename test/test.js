@@ -6,17 +6,17 @@ const HPCommons = Stock.HPCommons;
 const SC = Stock.StockConstants;
 
 const _ = require('lodash');
-const d3 = require('d3-dsv');
+const d3dsv = require('d3-dsv');
 
-let data = `date, high, low, open, close, volume
-November, 10, 5, 8, 9, 1000
-December, 20, 5, 5, 3.5, 2000`;
-let parsed = d3.csvParse(data);
-console.log(parsed.length);
+// let data = `date, high, low, open, close, volume
+// November, 10, 5, 8, 9, 1000
+// December, 20, 5, 5, 3.5, 2000`;
+// let parsed = d3dsv.csvParse(data);
+// console.log(parsed.length);
 
 //TODO pass an array then encapsulate the download on load(downloader)
 //TODO pass the stream so you can call the end callback etc
-//HP.load(HP.downloadWSJ('X',false,'PH'), funcCallback);
+HP.load(HP.downloadWSJ('DMC',false,'PH'), funcCallback);
 function funcCallback(hpModel) {
     new Promise((resolve,reject) => {
         resolve(hpModel);
@@ -65,11 +65,11 @@ function funcCallback(hpModel) {
         //         last: HPCommons.getStartedDate(xurpas),
         //         latest: HPCommons.getLatestDate(xurpas)
         //     }})
-        // .then(d => console.log("latest:", d.latest, ",last:", d.last));
+        // .then(d => console.log("latest:", d.latest, ", last:", d.last));
 
         //SAMPLE OF getColumn(hpModel, columnName)
-        //.then(xurpas => HPCommons.getColumn(xurpas, 'date'))
-        //.then(dateColumn => console.log(dateColumn));
+        .then(xurpas => HPCommons.getColumn(xurpas, 'date'))
+        .then(dateColumn => console.log(dateColumn.pop()));
 }
 
 
