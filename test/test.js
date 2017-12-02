@@ -16,20 +16,27 @@ const d3dsv = require('d3-dsv');
 
 //TODO pass an array then encapsulate the download on load(downloader)
 //TODO pass the stream so you can call the end callback etc
-HP.load(HP.downloadWSJ('DMC',false,'PH'), funcCallback);
-function funcCallback(hpModel) {
+HP.load(HP.downloadWSJ('X',false,'PH'), funcCallback);
+function funcCallback(d3Model) {
     new Promise((resolve,reject) => {
-        resolve(hpModel);
+        resolve(d3Model);
     })
 
         //Uncomment one of the samples to test
 
         //SAMPLE of getLowestPeaks, gets peaks within range of 30 days or 1 month in close column
-        // .then(x => HPCommons.getLowestPeaks(x, 30, 'close'))
+        // .then(x => HPCommons.getLowestPeaks(x, 150, 'close'))
+        // .then(peaks => console.log(peaks));
+
+        //SAMPLE of getHighestPeaks
+        // .then(x => HPCommons.getHighestPeaks(x, 150, 'close'))
         // .then(peaks => console.log(peaks));
 
         //SAMPLE of divided data by days, in the example group them per 5 days
-        // .then(x => HPCommons.divideRows(x,5))
+        // .then(x => {
+        //     console.log("total: " + x.length);
+        //     return HPCommons.divideRows(x,5);
+        // })
         // .then(divided => {
         //     let toPrint = '';
         //     _.forEach(divided, group => {
@@ -68,8 +75,8 @@ function funcCallback(hpModel) {
         // .then(d => console.log("latest:", d.latest, ", last:", d.last));
 
         //SAMPLE OF getColumn(hpModel, columnName)
-        .then(xurpas => HPCommons.getColumn(xurpas, 'date'))
-        .then(dateColumn => console.log(dateColumn.pop()));
+        // .then(xurpas => HPCommons.getColumn(xurpas, 'date'))
+        // .then(dateColumn => console.log(dateColumn));
 }
 
 

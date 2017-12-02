@@ -21,11 +21,15 @@ let now = dateFormat(new Date(), "mm/dd/yyyy");
 function load(stream, funcCallback) {
     let histPricesArr = [];
     stream.on('data', (data) => {
-        histPricesArr.push(data);
+        let str = ("" + data).trim().replace(/\s/g, "");
+        histPricesArr.push(str);
     })
     .on('end', () => {
         let joinedArr = histPricesArr.join("\n").toLowerCase();
         let result = d3dsv.csvParse(joinedArr);
+        _.forEach(result, row => {
+            row.date = HPCommons.toMoment(row.date, SC.DATE_FORMAT_WSJ);
+        });
         funcCallback(result);
     });
 }

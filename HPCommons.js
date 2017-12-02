@@ -23,63 +23,59 @@ module.exports = {
 
 /**
  * gets the lowest peaks of certain column given rows divided by days
- * @param {HPModel} hpModel 
+ * @param {[]} d3Model 
  * @param {number} days
  * @param {string} columnName
  */
-function getLowestPeaks(hpModel, days, columnName) {
-    let columnIndex = getColumnIndex(hpModel, columnName);
-    if (columnIndex === -1) return undefined;
+function getLowestPeaks(d3Model, days, columnName) {
 
-    let dividedRows = divideRows(hpModel, days);
+    let dividedRows = divideRows(d3Model, days);
     let lowestPeaks = [];
 
     _.forEach(dividedRows, group => {
-        let minRow = _.minBy(group, (row) => +row[columnIndex]);
+        let minRow = _.minBy(group, (row) => +row[columnName]);
         lowestPeaks.push(minRow);
     });
 
-    return new PeaksModel(SC.PEAK_LOWEST, days, columnName, columnIndex, lowestPeaks);
+    return new PeaksModel(SC.PEAK_LOWEST, days, columnName, lowestPeaks);
 }
 
 /**
  * gets the highest peaks of certain column given rows divided by days
- * @param {HPModel} hpModel 
+ * @param {[]} d3Model 
  * @param {number} days
  * @param {string} columnName
  */
-function getHighestPeaks(hpModel, days, columnName) {
-    let columnIndex = getColumnIndex(hpModel, columnName);
-    if (columnIndex === -1) return undefined;
+function getHighestPeaks(d3Model, days, columnName) {
 
-    let dividedRows = divideRows(hpModel, days);
+    let dividedRows = divideRows(d3Model, days);
     let highestPeaks = [];
 
     _.forEach(dividedRows, group => {
-        let maxRow = _.maxBy(group, (row) => +row[columnIndex]);
+        let maxRow = _.maxBy(group, (row) => +row[columnName]);
         highestPeaks.push(maxRow);
     });
 
-    return new PeaksModel(SC.PEAK_HIGHEST, days, columnName, columnIndex, highestPeaks);
+    return new PeaksModel(SC.PEAK_HIGHEST, days, columnName, highestPeaks);
 }
 
 /**
  * divide rows per number of days starting from the latest
- * @param {HPModel} hpModel 
+ * @param {[]} d3Model 
  * @param {number} days
  */
-function divideRows(hpModel, days) {
+function divideRows(d3Model, days) {
     if (days < 1) return undefined;
 
     let dividedRows = [];
     let group = [];
     let counter = 1;
-    _.forEach(hpModel.data, (row,index) => {
+    _.forEach(d3Model, (row,index) => {
         if (counter > days) {
             counter = 1;
             dividedRows.push(group);
             group = [];
-        } else if (index === hpModel.data.length - 1) {
+        } else if (index === d3Model.length - 1) {
             group.push(row);
             dividedRows.push(group);
             return;
@@ -93,11 +89,11 @@ function divideRows(hpModel, days) {
 
 /**
  * gets the time listed of the given stock security in format Y year/s and M month/s
- * @param {HPModel} hpModel 
+ * @param {[]} d3Model 
  */
-function getTimeListed(hpModel) {
-    let started = getStartedDate(hpModel);
-    let latest = getLatestDate(hpModel);
+function getTimeListed(d3Model) {
+    let started = getStartedDate(d3Model);
+    let latest = getLatestDate(d3Model);
 
     let duration = moment.duration(latest.diff(started));
     let years = Math.floor(duration.asYears());
@@ -116,74 +112,63 @@ function toMoment(dateString, format) {
 
 /**
  * gets the average of the min and max values of a column given column name
- * @param {HPModel} hpModel 
+ * @param {[]} d3Model 
  * @param {string} columnName 
  */
-function getMinMaxAverage(hpModel, columnName) {
-    let columnIndex = getColumnIndex(hpModel, columnName);
-    if (columnIndex === -1) return undefined;
+function getMinMaxAverage(d3Model, columnName) {
 
-    let min = getMinimum(hpModel, columnName);
-    let max = getMaximum(hpModel, columnName);
+    let min = getMinimum(d3Model, columnName);
+    let max = getMaximum(d3Model, columnName);
     return (min + max) / 2;
 }
 
 /**
  * gets the average of the values of a column given column name
- * @param {HPModel} hpModel 
+ * @param {[]} d3Model 
  * @param {string} columnName 
  */
-function getAverage(hpModel, columnName) {
-    let columnIndex = getColumnIndex(hpModel, columnName);
-    if (columnIndex === -1) return undefined;
+function getAverage(d3Model, columnName) {
 
-    return _.reduce(hpModel.data, (total, row) => {
-        return total + +row[columnIndex];
-    }, 0) / hpModel.data.length;
+    return _.reduce(d3Model, (total, row) => {
+        return total + +row[columnName];
+    }, 0) / d3Model.length;
 }
 
 /**
  * gets the minimum value of a column given column name
- * @param {HPModel} hpModel 
+ * @param {[]]} d3Model 
  * @param {string} columnName 
  */
-function getMinimum(hpModel, columnName) {
-    let columnIndex = getColumnIndex(hpModel, columnName);
-    if (columnIndex === -1) return undefined;
+function getMinimum(d3Model, columnName) {
 
-    return _.chain(hpModel.data)
+    return _.chain(d3Model)
         .map(row => {
-            return +row[columnIndex];
+            return +row[columnName];
         })
         .min().value();
 }
 
 /**
  * gets the maximum value of a column given column name
- * @param {HPModel} hpModel 
+ * @param {[]} d3Model 
  * @param {string} columnName 
  */
-function getMaximum(hpModel, columnName) {
-    let columnIndex = getColumnIndex(hpModel, columnName);
-    if (columnIndex === -1) return undefined;
+function getMaximum(d3Model, columnName) {
 
-    return _.chain(hpModel.data)
+    return _.chain(d3Model)
         .map(row => {
-            return +row[columnIndex];
+            return +row[columnName];
         })
         .max().value();
 }
 
 /**
  * gets the latest value of a column given column name
- * @param {HPModel} hpModel 
+ * @param {[]} d3Model 
  * @param {string} columnName 
  */
-function getLatest(hpModel, columnName) {
-    let columnIndex = getColumnIndex(hpModel, columnName);
-    if (columnIndex === -1) return undefined;
-
-    return _.first(hpModel.data)[columnIndex];
+function getLatest(d3Model, columnName) {
+    return +_.first(d3Model)[columnName];
 }
 
 /**
