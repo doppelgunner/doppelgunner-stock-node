@@ -6,12 +6,17 @@ const HPCommons = Stock.HPCommons;
 const SC = Stock.StockConstants;
 
 const _ = require('lodash');
+const d3 = require('d3-dsv');
 
+let data = `date, high, low, open, close, volume
+November, 10, 5, 8, 9, 1000
+December, 20, 5, 5, 3.5, 2000`;
+let parsed = d3.csvParse(data);
+console.log(parsed.length);
 
 //TODO pass an array then encapsulate the download on load(downloader)
 //TODO pass the stream so you can call the end callback etc
-HP.load(HP.downloadWSJ('X',false,'PH'), funcCallback);
-
+//HP.load(HP.downloadWSJ('X',false,'PH'), funcCallback);
 function funcCallback(hpModel) {
     new Promise((resolve,reject) => {
         resolve(hpModel);
@@ -20,8 +25,8 @@ function funcCallback(hpModel) {
         //Uncomment one of the samples to test
 
         //SAMPLE of getLowestPeaks, gets peaks within range of 30 days or 1 month in close column
-        .then(x => HPCommons.getLowestPeaks(x, 30, 'close'))
-        .then(peaks => console.log(peaks));
+        // .then(x => HPCommons.getLowestPeaks(x, 30, 'close'))
+        // .then(peaks => console.log(peaks));
 
         //SAMPLE of divided data by days, in the example group them per 5 days
         // .then(x => HPCommons.divideRows(x,5))

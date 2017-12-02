@@ -17,8 +17,7 @@ module.exports = {
     getTimeListed: getTimeListed,
     getHighestPeaks: getHighestPeaks,
     getLowestPeaks: getLowestPeaks,
-
-
+    
     toMoment: toMoment,
     divideRows: divideRows
 }
