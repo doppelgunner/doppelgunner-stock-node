@@ -24,6 +24,13 @@ function funcCallback(d3Model) {
 
         //Uncomment one of the samples to test
 
+        .then(x => HPCommons.getGainLossAverage(x))
+        .then(ave => console.log(ave));
+
+        //SAMPE of getGainLoss, gets gain/loss per day of close column
+        // .then(x => HPCommons.getGainLoss(x))
+        // .then(gainLoss => console.log(gainLoss));
+
         //SAMPLE of getLowestPeaks, gets peaks within range of 30 days or 1 month in close column
         // .then(x => HPCommons.getLowestPeaks(x, 150, 'close'))
         // .then(peaks => console.log(peaks));

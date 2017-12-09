@@ -1,5 +1,7 @@
 const _ = require('lodash');
 const moment = require('moment');
+const percent = require('percent');
+
 const SC = require('./StockConstants');
 const PeaksModel = require('./PeaksModel');
 
@@ -16,9 +18,44 @@ module.exports = {
     getTimeListed: getTimeListed,
     getHighestPeaks: getHighestPeaks,
     getLowestPeaks: getLowestPeaks,
+    getGainLoss: getGainLoss,
+    getGainLossAverage: getGainLossAverage,
     
     toMoment: toMoment,
     divideRows: divideRows
+
+
+}
+
+/**
+ * gets the average of gain/loss per day of close price in percent %
+ * @param {[]} d3Model 
+ */
+function getGainLossAverage(d3Model) {
+    let gainLossArr = getGainLoss(d3Model);
+    let ave = _.reduce(gainLossArr, (sum, closePercent) => {
+        return sum + closePercent;
+    }, 0) / gainLossArr.length;
+    return ave;
+}
+
+/**
+ * gets the list of gain/loss per day of close price in percent %
+ * @param {[]} d3Model 
+ */
+function getGainLoss(d3Model) {
+    let reversed = _.reverse(d3Model);
+    let otherRow = +reversed[0].close;
+    let gainLossArr = [];
+    for (let i = 1; i < reversed.length; i++) {
+        let row = +reversed[i].close;
+        let diff = row - otherRow;
+        let gainLoss = +percent.calc(diff,otherRow,2);
+        gainLossArr.push(gainLoss);
+
+        otherRow = row;
+    }
+    return gainLossArr;
 }
 
 /**
