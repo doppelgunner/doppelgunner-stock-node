@@ -20,11 +20,24 @@ module.exports = {
     getLowestPeaks: getLowestPeaks,
     getGainLoss: getGainLoss,
     getGainLossAverage: getGainLossAverage,
+    getVolatility: getVolatility,
     
     toMoment: toMoment,
     divideRows: divideRows
 
 
+}
+
+/**
+ * gets the volatility of the close price by gainLoss percentage
+ * @param {[]} d3Model 
+ */
+function getVolatility(d3Model) {
+    let gainLossArr = getGainLoss(d3Model);
+    let ave = _.reduce(gainLossArr, (sum, closePercent) => {
+        return sum + Math.abs(closePercent);
+    }, 0) / gainLossArr.length;
+    return ave;
 }
 
 /**

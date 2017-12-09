@@ -23,9 +23,13 @@ function funcCallback(d3Model) {
     })
 
         //Uncomment one of the samples to test
+        //SAMPLE of getVolatility, gets the volatility of the stock price of the company
+        .then(x => HPCommons.getVolatility(x))
+        .then(volatility => console.log(volatility));
 
-        .then(x => HPCommons.getGainLossAverage(x))
-        .then(ave => console.log(ave));
+        //SAMPLE of getGainLossAverage, gets the average of gain/loss per day
+        // .then(x => HPCommons.getGainLossAverage(x))
+        // .then(ave => console.log(ave));
 
         //SAMPE of getGainLoss, gets gain/loss per day of close column
         // .then(x => HPCommons.getGainLoss(x))
