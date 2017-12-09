@@ -29,8 +29,8 @@ function funcCallback(d3Model) {
         // .then(volatility => console.log(volatility));
 
         //SAMPLE of getGainLossAverage, gets the average of gain/loss per day
-        .then(x => HPCommons.getGainLossAverage(x))
-        .then(ave => console.log(ave));
+        // .then(x => HPCommons.getGainLossAverage(x))
+        // .then(ave => console.log(ave));
 
         //SAMPE of getGainLoss, gets gain/loss per day of close column
         // .then(x => HPCommons.getGainLoss(x))
@@ -58,8 +58,8 @@ function funcCallback(d3Model) {
         // });
 
         //SAMPLE OF getTimeListed(hpModel);
-        // .then(x => HPCommons.getTimeListed(x))
-        // .then(timeListed => console.log(timeListed));
+        .then(x => HPCommons.getTimeListed(x))
+        .then(timeListed => console.log(timeListed));
 
         //SAMPLE OF get min,max,ave,minMaxAve,latest using methodName(hpModel,columnName);
         // .then(xurpas => {
