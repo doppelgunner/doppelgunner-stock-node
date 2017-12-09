@@ -21,7 +21,7 @@ module.exports = {
     getGainLoss: getGainLoss,
     getGainLossAverage: getGainLossAverage,
     getVolatility: getVolatility,
-    
+
     toMoment: toMoment,
     divideRows: divideRows
 
