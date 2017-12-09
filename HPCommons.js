@@ -57,7 +57,7 @@ function getGainLossAverage(d3Model) {
  * @param {[]} d3Model 
  */
 function getGainLoss(d3Model) {
-    let reversed = _.reverse(d3Model);
+    let reversed = _.reverse(d3Model.slice());
     let otherRow = +reversed[0].close;
     let gainLossArr = [];
     for (let i = 1; i < reversed.length; i++) {
