@@ -1,11 +1,11 @@
 {
   "name": "doppelgunner-stock",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "stock api for node connects with WSJ as of now",
   "main": "index.js",
   "repository": {
-     "type": "git",
-     "url": "https://github.com/doppelgunner/doppelgunner-stock-node.git"
+    "type": "git",
+    "url": "https://github.com/doppelgunner/doppelgunner-stock-node.git"
   },
   "scripts": {
     "test": "node test/test.js"
