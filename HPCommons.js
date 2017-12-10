@@ -147,7 +147,7 @@ function getTimeListed(d3Model) {
 
     let duration = moment.duration(latest.diff(started));
     let years = Math.floor(duration.asYears());
-    let months = Math.floor(duration.asDays() % 12);
+    let months = Math.floor(duration.asMonths() % 12);
     return SC.TIME_LISTED_FORMAT.replace("[Y]", years).replace("[M]", months);
 }
 
