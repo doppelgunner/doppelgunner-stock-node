@@ -58,8 +58,8 @@ function funcCallback(d3Model) {
         // });
 
         //SAMPLE OF getTimeListed(hpModel);
-        .then(x => HPCommons.getTimeListed(x))
-        .then(timeListed => console.log(timeListed));
+        // .then(x => HPCommons.getTimeListed(x))
+        // .then(timeListed => console.log(timeListed));
 
         //SAMPLE OF get min,max,ave,minMaxAve,latest using methodName(hpModel,columnName);
         // .then(xurpas => {

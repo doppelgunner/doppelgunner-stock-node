@@ -128,7 +128,7 @@ function divideRows(d3Model, days) {
         } else if (index === d3Model.length - 1) {
             group.push(row);
             dividedRows.push(group);
-            return;
+            return dividedRows;
         }
 
         group.push(row);
